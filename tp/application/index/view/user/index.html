@@ -1,0 +1,133 @@
+<!doctype html>
+ <html>
+    <head>
+         <meta charset="UTF-8">
+		 <link rel="stylesheet" type="text/css" href="__ROOT__/layui-v2.4.5/layui/css/layui.css"/>
+	</head>
+  <body>
+	  <div id="box" style="display:none;">
+	  	<form action="" method="">
+	  		<div class="layui-form-item" style="width:450px;">
+				<label class="layui-form-label">输入框</label>
+				<div class="layui-input-block">
+				  <input id="title" type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+			</div><br/>
+			<div class="layui-form-item layui-form-text" style="width:450px;">
+				<label class="layui-form-label">文本域</label>
+				<div class="layui-input-block">
+				  <textarea name="desc" placeholder="请输入内容" class="layui-textarea" id="desc"></textarea>
+				</div>
+			 </div>
+			 <div class="layui-form-item">
+				<div class="layui-input-block">
+				  <button class="layui-btn" lay-submit lay-filter="formDemo" id="jiao">立即提交</button>
+				  <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			 </div>
+	  	</form>
+	  </div>
+	  </div>
+  <center>
+	  <button class="layui-btn text2">增加</button>
+     <table border="1" class="layui-table" style="width:60%;margin:0 auto;margin-top:10px;">
+          <tr>
+              <td>id</td><td>用户名</td><td>密码</td><td>操作</td>
+          </tr>
+          {foreach name="list" item="vo"}
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.name}</td>
+                <td>{$vo.pass|substr=0,12}</td>
+                <td>
+                    
+					<button class="layui-btn tex1" value="{$vo.id}">删除</button>
+					<button class="layui-btn tex3" value="{$vo.id}">查看</button>
+                </td>
+            </tr>
+      {/foreach}
+      </table>
+  </center>
+	  <script type="text/javascript" src="__JS__/jquery-3.3.1.min.js"></script>
+	  <script type="text/javascript" src="__ROOT__/layer-v3.1.1/layer/layer.js"></script>
+	  <script type="text/javascript">
+		  var box=$("#box");
+		$(".text2").click(function(){
+			layer.open({
+			  type: 1,
+			  area: ['600px', '360px'],
+			  shadeClose: true, //点击遮罩关闭
+			  content:box
+			});
+			$("#jiao").click(function(){
+				var title=$("#title").val();
+				var desc=$("#desc").val();
+				layer.msg('你确定要删除吗？', {
+						  time: 0 ,//不自动关闭
+						  btn: ['yes', 'no'],
+						  yes: function(index){
+							 /* $.ajax({
+							 	url:"__URL__/del",
+							 	type:'post',
+							 	data:{title:title,desc,desc},
+							 	success:function(data){
+							 		if(data==0){
+										layer.msg('成功');
+										setTimeout(function(){
+											　　location.replace(location.href);
+										},1000);
+									}else{
+										layer.msg('失败');
+										setTimeout(function(){
+											　　location.replace(location.href);
+										},1000);
+							 	}
+							 }
+						  }) */
+						}
+				});	
+		});
+		$('.tex1').click(function(){
+			var id=$(this).val();
+			//alert(text);
+			alert(id);
+			layer.msg('你确定要删除吗？', {
+				  time: 0 ,//不自动关闭
+				  btn: ['yes', 'no'],
+				  yes: function(index){
+					 $.ajax({
+					 	url:"__URL__/del",
+					 	type:'post',
+					 	data:{id:id},
+					 	success:function(data){
+					 		if(data==0){
+								layer.msg('删除成功');
+								setTimeout(function(){
+									　　location.replace(location.href);
+								},1000);
+							}else{
+								layer.msg('删除失败');
+								setTimeout(function(){
+									　　location.replace(location.href);
+								},1000);
+					 	}
+					 }
+				  })
+				}
+		});	
+		});
+		});
+		$(".text3").click(function(){
+			var id=$(this).val();
+			$.ajax({
+				url:"__URL__/show",
+				type:'post',
+				data:{id:id},
+				success:function(data){
+					
+				}
+			 }
+			})
+		})
+	  </script>
+   </body>
+</html>

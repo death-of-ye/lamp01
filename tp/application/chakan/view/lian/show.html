@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="__ROOT__/layui-v2.4.5/layui/css/layui.css">
+    <script src="__ROOT__/layer-v3.1.1/layer/layer.js"></script>
+    <script src="__JS__/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<center>
+    <div>
+         <form class="layui-form" action="">
+             <div class="layui-form-item">
+                 <label class="layui-form-label">输入框</label>
+                 <div class="layui-input-block">
+                     <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                 </div>
+             </div>
+             <div class="layui-form-item layui-form-text">
+                 <label class="layui-form-label">文本域</label>
+                 <div class="layui-input-block">
+                     <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                 </div>
+             </div>
+         </form>
+    </div>
+    {include file="common/gong"}<br><br>
+     <table border="1" class="layui-table">
+         <tr>
+             <td>id</td><td>标题</td><td>内容</td><td>操作</td>
+         </tr>
+         {foreach name="list" item="vo"}
+          <tr>
+              <td>{$vo.id}</td>
+              <td>{$vo.title}</td>
+              <td>{$vo.content|substr=0,3}...</td>
+              <td>
+                 <button class="layui-btn" id="del">删除</button>
+                  <a href="">查看</a>
+              </td>
+          </tr>
+         {/foreach}
+     </table>
+</center>
+<script>
+
+</script>
+</body>
+</html>

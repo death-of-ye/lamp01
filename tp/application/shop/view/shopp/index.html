@@ -1,0 +1,28 @@
+<!doctype html>
+ <html>
+    <head>
+         <meta charset="UTF-8">
+    </head>
+  <body>
+  __ROOT__
+  <center>
+      <table border="1">
+      {include file="common/gong"}
+
+             <tr>
+                 <td>商品id</td><td>商品名字</td><td>购买用户</td><td>图片</td><td>商品介绍</td><td>商品价钱</td>
+             </tr>
+          {foreach name="re" item="vo"}
+             <tr>
+                 <td>{$vo.id}</td>
+                 <td>{$vo.shopname}</td>
+                 <td>{$vo.name}</td>
+                 <td><img src="__ROOT__/uploads/{$vo.pic}"></td>
+                 <td>{$vo.info}</td>
+                 <td>{$vo.price}</td>
+             </tr>
+         {/foreach}
+      </table>
+  </center>
+   </body>
+</html>
